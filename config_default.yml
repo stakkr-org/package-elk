@@ -1,0 +1,21 @@
+---
+
+services:
+  elasticsearch:
+    enabled: false
+    version: latest
+    ram: 2048M
+    service_name: ElasticSearch
+    service_url: http://{}
+  kibana:
+    enabled: false
+    version: latest
+    ram: 2048M
+    service_name: Kibana
+    service_url: http://{}
+  logstash:
+    enabled: false
+    version: latest
+    ram: 2048M
+    service_name: Logstash
+    service_url: http://{}
