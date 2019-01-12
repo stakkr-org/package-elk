@@ -9,33 +9,33 @@ properties:
     properties:
       elasticsearch:
         type: object
+        additionalProperties: false
         properties:
           enabled: { type: boolean }
           version: { type: [string, number] }
           ram: { type: string }
-          name: { type: string }
           service_name: { type: string }
           service_url: { type: string }
         required: [enabled, version, ram, service_name, service_url]
 
       kibana:
         type: object
+        additionalProperties: false
         properties:
           enabled: { type: boolean }
           version: { type: [string, number] }
           ram: { type: string }
-          name: { type: string }
           service_name: { type: string }
           service_url: { type: string }
         required: [enabled, version, ram, service_name, service_url]
 
       logstash:
         type: object
+        additionalProperties: false
         properties:
           enabled: { type: boolean }
           version: { type: [string, number] }
           ram: { type: string }
-          name: { type: string }
           service_name: { type: string }
           service_url: { type: string }
         required: [enabled, version, ram, service_name, service_url]
