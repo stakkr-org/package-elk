@@ -13,5 +13,5 @@ services:
             server_name: logstash
             elasticsearch_url: ${COMPOSE_PROJECT_NAME}_elasticsearch
         labels:
-            - traefik.frontend.rule=Host:logstash.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}
-            - traefik.port=9600
+            traefik.frontend.rule: "Host:logstash.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}"
+            traefik.port: 9600
