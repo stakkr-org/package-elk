@@ -1,14 +1,17 @@
-version: '2.2'
+version: "3.8"
 
 services:
-    kibana:
-        image: docker.elastic.co/kibana/kibana:${DOCKER_KIBANA_VERSION}
-        mem_limit: ${DOCKER_KIBANA_RAM}
-        container_name: ${COMPOSE_PROJECT_NAME}_kibana
-        hostname: ${COMPOSE_PROJECT_NAME}_kibana
-        networks: [stakkr]
-        environment:
-            server_name: kibana
-            elasticsearch_url: ${COMPOSE_PROJECT_NAME}_elasticsearch
-        labels:
-            traefik.frontend.rule: Host:kibana.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}
+  kibana:
+    image: docker.elastic.co/kibana/kibana:${DOCKER_KIBANA_VERSION}
+    mem_limit: ${DOCKER_KIBANA_RAM}
+    container_name: ${COMPOSE_PROJECT_NAME}_kibana
+    hostname: ${COMPOSE_PROJECT_NAME}_kibana
+    networks: [stakkr]
+    environment:
+      server_name: kibana
+      elasticsearch_url: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    labels:
+      traefik.enable: "true"
+      traefik.http.services.kibana.loadbalancer.server.port: 5601
+      traefik.http.routers.kibana.tls: "true"
+      traefik.http.routers.kibana.rule: "Host(`kibana.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}`)"

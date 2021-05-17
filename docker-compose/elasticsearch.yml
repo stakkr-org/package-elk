@@ -1,19 +1,21 @@
-version: '2.2'
+version: "3.8"
 
 services:
-    elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:${DOCKER_ELASTICSEARCH_VERSION}
-        mem_limit: ${DOCKER_ELASTICSEARCH_RAM}
-        container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
-        hostname: ${COMPOSE_PROJECT_NAME}_elasticsearch
-        networks: [stakkr]
-        volumes:
-            - ${COMPOSE_BASE_DIR}/data/elasticsearch:/usr/share/elasticsearch/data
-        environment:
-            cluster.name: ${COMPOSE_PROJECT_NAME}
-            discovery.type: single-node
-            xpack.security.enabled: "false"
-            ES_JAVA_OPTS: -Xms${DOCKER_ELASTICSEARCH_RAM} -Xmx${DOCKER_ELASTICSEARCH_RAM}
-        labels:
-            traefik.frontend.rule: "Host:elasticsearch.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}"
-            traefik.port: 9200
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${DOCKER_ELASTICSEARCH_VERSION}
+    mem_limit: ${DOCKER_ELASTICSEARCH_RAM}
+    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    hostname: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    networks: [stakkr]
+    volumes:
+      - ${COMPOSE_BASE_DIR}/data/elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      cluster.name: ${COMPOSE_PROJECT_NAME}
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms${DOCKER_ELASTICSEARCH_RAM} -Xmx${DOCKER_ELASTICSEARCH_RAM}
+    labels:
+      traefik.enable: "true"
+      traefik.http.services.elasticsearch.loadbalancer.server.port: 9200
+      traefik.http.routers.elasticsearch.tls: "true"
+      traefik.http.routers.elasticsearch.rule: "Host(`elasticsearch.${COMPOSE_PROJECT_NAME}.${PROXY_DOMAIN}`)"

@@ -6,16 +6,16 @@ services:
     version: latest
     ram: 2048M
     service_name: ElasticSearch
-    service_url: http://{} (works also in https)
+    service_url: https://{}
   kibana:
     enabled: false
     version: latest
     ram: 2048M
     service_name: Kibana
-    service_url: http://{} (works also in https)
+    service_url: https://{}
   logstash:
     enabled: false
     version: latest
     ram: 2048M
     service_name: Logstash
-    service_url: http://{} (works also in https)
+    service_url: https://{}
